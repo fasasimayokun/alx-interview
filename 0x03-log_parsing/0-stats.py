@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A script that reads standardinput line by line and computes metrics
+a py script that reads stdinput line by line and computes metrics
 """
 import sys
 
@@ -18,8 +18,8 @@ if __name__ == "__main__":
     counter = 1
     totalFileSize = 0
     try:
-        for ln in sys.stdin:
-            inputs = ln.split()
+        for line in sys.stdin:
+            inputs = line.split()
             if (len(inputs) >= 7):
                 try:
                     file_size = inputs[-1]
@@ -27,14 +27,14 @@ if __name__ == "__main__":
                     totalFileSize += int(file_size)
                     default_status_codes[int(status_code)] += 1
                 except ValueError:
-                    cnt -= 1
-            if (cnt % 10 == 0):
+                    counter -= 1
+            if (counter % 10 == 0):
                 print("File size: {:d}".format(totalFileSize))
                 for code in sorted(default_status_codes.keys()):
                     if (default_status_codes[code] > 0):
                         print("{}: {:d}".format(
                             str(code), default_status_codes[code]))
-            cnt += 1
+            counter += 1
     except KeyboardInterrupt:
         pass
 
